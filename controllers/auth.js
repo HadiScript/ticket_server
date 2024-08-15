@@ -25,6 +25,8 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
   const { email, password } = req.body;
   try {
+    // return res.json({ error: "koi masla ho gya" });
+
     const validUser = await User.findOne({ email }).populate("category");
     if (!validUser) return next(errorHandler(404, "User not found!"));
     const validPassword = bcryptjs.compareSync(password, validUser.password);

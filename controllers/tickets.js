@@ -12,7 +12,7 @@ const ticketBucket = async (req, res, next) => {
     console.log(_user, "here is the user agnet");
 
     if (_user.role === "agent") {
-      const _tickets = await Ticket.find({ status: "Open", pickedBy: null, category: _user.category });
+      const _tickets = await Ticket.find({ status: "Open", pickedBy: null, category: _user.category }).populate("category");
       res.status(200).json({ tickets: _tickets });
     } else {
       const _tickets = await Ticket.find({ status: "Open", pickedBy: null });
@@ -110,7 +110,7 @@ const addComments = async (req, res, next) => {
       ticket.firstRespondedAt = new Date();
       const timeDifference = (ticket.firstRespondedAt - new Date(ticket.createdAt)) / 60000; // Difference in minutes
 
-      if (timeDifference > 1) {
+      if (timeDifference > 10) {
         ticket.secondSLABreach = true;
       }
     }
@@ -436,7 +436,12 @@ const detailTicket = async (req, res, next) => {
     const { ticketId } = req.params;
 
     // Find the ticket by ID
-    const ticket = await Ticket.findOne({ _id: ticketId }).populate("category comments");
+    const ticket = await Ticket.findOne({ _id: ticketId })
+      .populate({
+        path: "comments",
+        populate: { path: "createdBy" },
+      })
+      .populate("category");
 
     res.status(200).json({ singleTicket: ticket });
   } catch (error) {
@@ -528,7 +533,14 @@ const allEscalatedTickets = async (req, res, next) => {
 
 const detailTicketsAdmin = async (req, res, next) => {
   try {
-    const ticket = await Ticket.findById({ _id: req.params.ticketId }).populate("category pickedBy comments pickedBy");
+    const ticket = await Ticket.findById({ _id: req.params.ticketId })
+      .populate({
+        path: "comments",
+        populate: { path: "createdBy" },
+      })
+      .populate("category pickedBy pickedBy");
+
+    // .populate("category pickedBy comments pickedBy");
     res.json({ ticket });
   } catch (error) {
     next(error);

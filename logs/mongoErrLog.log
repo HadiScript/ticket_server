@@ -1,3 +1,6 @@
 20240424	22:25:37	b1e5ac50-8bbe-40f9-9bec-5baedec6f777	undefined: ESERVFAIL	querySrv	_mongodb._tcp.cluster0.j4vwb4o.mongodb.net
 20240501	18:56:04	bde1e933-c572-4150-97ac-b9c1307095b7	undefined: undefined	undefined	undefined
 20240501	19:45:00	4b2eeb41-c647-4d64-a38c-ca108ab86a29	undefined: undefined	undefined	undefined
+20240512	19:54:38	ff8bcfea-d46f-4fba-a22d-a90c229cf13a	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.j4vwb4o.mongodb.net
+20240517	00:22:58	a6dc427f-b446-4fa4-8d4a-4f4e4c3ea1f0	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.j4vwb4o.mongodb.net
+20240518	14:11:28	1fc7b5a6-76dd-4740-88ab-9847974a0d1e	undefined: ECONNREFUSED	querySrv	_mongodb._tcp.cluster0.j4vwb4o.mongodb.net

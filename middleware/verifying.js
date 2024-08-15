@@ -102,7 +102,7 @@ const HandoverRights = async (req, res, next) => {
 const isClient = async (req, res, cb) => {
   try {
     const user = await User.findById(req.user.id);
-    if (user.role !== "client") {
+    if (user?.role !== "client") {
       return cb(errorHandler(401, "Not allowed"));
     } else {
       cb();
